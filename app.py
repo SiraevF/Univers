@@ -126,7 +126,7 @@ if filter_option == "Студент":
             WHERE Students.LastName = ? AND Students.FirstName = ?
         ''', (last_name, first_name)).fetchall()
 
-        df_student = pd.DataFrame(student_info, columns=["LastName", "FirstName", "GroupNumber", "Course", "Subject", "Grade", "Teacher"])
+        df_student = pd.DataFrame(student_info, columns=["Фамилия", "Имя", "Группа", "Курс", "Предмет", "Оценка", "Преподаватель"])
         st.write(df_student)
         result_json = df_student.to_json(orient='records', force_ascii=False)
         st.json(json.loads(result_json))
@@ -150,7 +150,7 @@ elif filter_option == "Преподаватель":
             WHERE Teachers.LastName = ? AND Teachers.FirstName = ?
         ''', (last_name, first_name)).fetchall()
 
-        df_teacher = pd.DataFrame(teacher_info, columns=["TeacherLastName", "TeacherFirstName", "Student", "Subject", "Grade"])
+        df_teacher = pd.DataFrame(teacher_info, columns=["Фамилия", "Имя", "Студент", "Предмет", "Оценка"])
         st.write(df_teacher)
         result_json = df_teacher.to_json(orient='records', force_ascii=False)
         st.json(json.loads(result_json))
@@ -174,7 +174,7 @@ elif filter_option == "Предмет":
             WHERE Subjects.SubjectName = ?
         ''', (selected_subject,)).fetchall()
 
-        df_subject = pd.DataFrame(subject_info, columns=["Subject", "Teacher", "Student", "Grade"])
+        df_subject = pd.DataFrame(subject_info, columns=["Предмет", "Преподаватель", "Студент", "Оценка"])
         st.write(df_subject)
         result_json = df_subject.to_json(orient='records', force_ascii=False)
         st.json(json.loads(result_json))
